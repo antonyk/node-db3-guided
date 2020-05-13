@@ -1,3 +1,5 @@
+const connectionString = process.env.DATABASE_URL || ''
+
 module.exports = {
   development: {
     client: 'sqlite3',
@@ -19,4 +21,17 @@ module.exports = {
       },
     },
   },
+
+  production: {
+    client: 'pg',
+    connection: connectionString,
+    pool: {
+      min: 1,
+      max: 4
+    },
+    migrations: {
+      directory: './data/migrations'
+    }
+  }
+
 };
